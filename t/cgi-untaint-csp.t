@@ -5,7 +5,7 @@
 
 #########################
 
-use Test::More tests => 7;
+use Test::More tests => 8;
 BEGIN { use_ok('CGI::Untaint::CSP') };
 
 #########################
@@ -17,6 +17,7 @@ ok( 'Kent' =~ $regex, 'valid state' );
 ok( '12' !~ $regex, 'invalid state' );
 
 use_ok('CGI::Untaint');
+
 my $vars = {
     state1 => 'MD',
     state2 => 'Kent',
@@ -35,3 +36,4 @@ is($c, undef, 'Kent');
 
 # and what about empty fields?
 $c = $untainter->extract(-as_CSP => 'state3');
+is($c, undef, 'Empty');

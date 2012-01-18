@@ -12,13 +12,13 @@ CGI::Untaint::CSP - Validate a state, county or province
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
-my @countries;
+our @countries;
 
 =head1 SYNOPSIS
 
@@ -34,7 +34,6 @@ US state.
     use CGI::Untaint;
     use CGI::Untaint::CSP::GB;
     my $info = CGI::Info->new();
-    my $csp = CGI::Untaint::CSP::GB->new();
     my $u = CGI::Untaint->new($info->params());
     $u->extract(-as_CSP => 'state');
     # ...
@@ -62,9 +61,11 @@ sub is_valid {
 
 	my $value = $self->value;
 
-warn "Checking value $value";
-
-	# TODO validate - foreach country call country->is_valid on it
+	foreach my $country (@countries) {
+		unless($country->is_valid($value)) {
+			return 0;
+		}
+	}
 
 	return 1;
 }

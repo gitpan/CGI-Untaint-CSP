@@ -1,4 +1,7 @@
 Revision history for CGI-Untaint-CSP
 
+0.02	Wed Jan 18 21:37:18 GMT 2012
+	Added real validations - 0.01 was just a template
+
 0.01	Wed Jan 18 15:59:42 GMT 2012
         First draft
